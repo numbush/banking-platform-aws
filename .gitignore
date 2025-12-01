@@ -1,0 +1,7 @@
+**/__pycache__/
+**/*.pyc
+**/.env
+*.tfstate
+*.tfvars
+.vscode/
+.idea/
