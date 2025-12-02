@@ -2,6 +2,11 @@
 **/*.pyc
 **/.env
 *.tfstate
+*.tfstate.backup
 *.tfvars
 .vscode/
 .idea/
+
+# Terraform
+**/.terraform/
+**/.terraform.lock.hcl
