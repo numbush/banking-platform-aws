@@ -10,5 +10,5 @@ output "eks_node_group_role_arn" {
 
 output "aws_load_balancer_controller_role_arn" {
   description = "AWS Load Balancer Controller IAM role ARN"
-  value       = aws_iam_role.aws_load_balancer_controller.arn
+  value       = try(aws_iam_role.aws_load_balancer_controller[0].arn, "")
 }

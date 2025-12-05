@@ -16,6 +16,7 @@ variable "eks_cluster_name" {
 variable "oidc_provider_arn" {
   description = "OIDC provider ARN"
   type        = string
+  default     = ""
 }
 
 variable "tags" {

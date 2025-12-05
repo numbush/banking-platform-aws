@@ -26,7 +26,7 @@ variable "public_subnet_ids" {
 variable "cluster_version" {
   description = "Kubernetes version"
   type        = string
-  default     = "1.28"
+  default     = "1.30"
 }
 
 variable "node_group_desired_size" {
@@ -50,7 +50,7 @@ variable "node_group_max_size" {
 variable "node_instance_types" {
   description = "EC2 instance types for nodes"
   type        = list(string)
-  default     = ["t3.medium"]
+  default     = ["t3.micro"]
 }
 
 variable "eks_cluster_role_arn" {

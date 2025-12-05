@@ -59,8 +59,9 @@ resource "aws_iam_role_policy_attachment" "eks_container_registry_policy" {
   role       = aws_iam_role.eks_node_group.name
 }
 
-# AWS Load Balancer Controller IAM Policy
+# AWS Load Balancer Controller IAM Policy (only if OIDC provider exists)
 resource "aws_iam_policy" "aws_load_balancer_controller" {
+  count       = var.oidc_provider_arn != "" ? 1 : 0
   name        = "${var.project_name}-${var.environment}-aws-load-balancer-controller"
   description = "Policy for AWS Load Balancer Controller"
 
@@ -243,8 +244,9 @@ resource "aws_iam_policy" "aws_load_balancer_controller" {
   tags = var.tags
 }
 
-# IAM Role for AWS Load Balancer Controller
+# IAM Role for AWS Load Balancer Controller (only if OIDC provider exists)
 resource "aws_iam_role" "aws_load_balancer_controller" {
+  count = var.oidc_provider_arn != "" ? 1 : 0
   name = "${var.project_name}-${var.environment}-aws-load-balancer-controller"
 
   assume_role_policy = jsonencode({
@@ -268,6 +270,7 @@ resource "aws_iam_role" "aws_load_balancer_controller" {
 }
 
 resource "aws_iam_role_policy_attachment" "aws_load_balancer_controller" {
-  policy_arn = aws_iam_policy.aws_load_balancer_controller.arn
-  role       = aws_iam_role.aws_load_balancer_controller.name
+  count = var.oidc_provider_arn != "" ? 1 : 0
+  policy_arn = aws_iam_policy.aws_load_balancer_controller[0].arn
+  role       = aws_iam_role.aws_load_balancer_controller[0].name
 }

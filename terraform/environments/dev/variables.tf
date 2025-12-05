@@ -46,7 +46,7 @@ variable "enable_nat_gateway" {
 variable "eks_cluster_version" {
   description = "EKS cluster Kubernetes version"
   type        = string
-  default     = "1.28"
+  default     = "1.30"
 }
 
 variable "eks_node_desired_size" {
@@ -70,5 +70,5 @@ variable "eks_node_max_size" {
 variable "eks_node_instance_types" {
   description = "EC2 instance types for EKS nodes"
   type        = list(string)
-  default     = ["t3.medium"]
+  default     = ["t3.micro"]
 }
