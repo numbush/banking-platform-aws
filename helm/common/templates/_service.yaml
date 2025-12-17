@@ -1,0 +1,17 @@
+{{- define "banking-common.service" -}}
+apiVersion: v1
+kind: Service
+metadata:
+  name: {{ include "banking-common.fullname" . }}
+  labels:
+    {{- include "banking-common.labels" . | nindent 4 }}
+spec:
+  type: {{ .Values.service.type }}
+  ports:
+  - port: {{ .Values.service.port }}
+    targetPort: http
+    protocol: TCP
+    name: http
+  selector:
+    {{- include "banking-common.selectorLabels" . | nindent 4 }}
+{{- end }}

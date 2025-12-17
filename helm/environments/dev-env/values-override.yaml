@@ -1,0 +1,20 @@
+# Use this for testing with different values
+
+accounts-service:
+  replicaCount: 1  # Lower replicas for testing
+  resources:
+    limits:
+      cpu: 250m
+      memory: 256Mi
+    requests:
+      cpu: 100m
+      memory: 128Mi
+
+cards-service:
+  replicaCount: 1
+
+loans-service:
+  replicaCount: 1
+
+gateway-service:
+  replicaCount: 1

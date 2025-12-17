@@ -1,0 +1,24 @@
+apiVersion: v2
+name: banking-dev-env
+description: Banking platform - dev environment
+type: application
+version: 1.0.0
+appVersion: "1.0.0"
+
+dependencies:
+  - name: accounts-service
+    version: "1.0.0"
+    repository: "file://../../services/accounts"
+    condition: accounts-service.enabled
+  - name: cards-service
+    version: "1.0.0"
+    repository: "file://../../services/cards"
+    condition: cards-service.enabled
+  - name: loans-service
+    version: "1.0.0"
+    repository: "file://../../services/loans"
+    condition: loans-service.enabled
+  - name: gateway-service
+    version: "1.0.0"
+    repository: "file://../../services/gateway"
+    condition: gateway-service.enabled

@@ -1,0 +1,15 @@
+dependencies:
+- name: accounts-service
+  repository: file://../../services/accounts
+  version: 1.0.0
+- name: cards-service
+  repository: file://../../services/cards
+  version: 1.0.0
+- name: loans-service
+  repository: file://../../services/loans
+  version: 1.0.0
+- name: gateway-service
+  repository: file://../../services/gateway
+  version: 1.0.0
+digest: sha256:dd91ea6ac15eb48b01e664a7716130f9f559569111109baac33d591555fd3c1b
+generated: "2025-12-17T15:23:51.784893324+02:00"
