@@ -41,8 +41,8 @@ def proxy_request(url):
             allow_redirects=False
         )
         return resp.content, resp.status_code, resp.headers.items()
-    except Exception as e:
-        return jsonify({'error': str(e)}), 500
+    except requests.exceptions.RequestException as e:
+        return jsonify({'error': str(e)}), 503
 
 if __name__ == '__main__':
-    app.run(host='0.0.0.0', port=8090, debug=True)
+    app.run(host='0.0.0.0', port=8090, debug=False)

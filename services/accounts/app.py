@@ -5,7 +5,15 @@ import os
 import random
 
 app = Flask(__name__)
-app.config['SQLALCHEMY_DATABASE_URI'] = os.getenv('DATABASE_URL', 'postgres://postgres:postgres@localhost:5432/accounts')
+
+DB_HOST = os.getenv('DB_HOST', 'localhost')
+DB_PORT = os.getenv('DB_PORT', '5432')
+DB_USER = os.getenv('DB_USER', 'postgres')
+DB_PASSWORD = os.getenv('DB_PASSWORD', 'postgres')
+DB_NAME = os.getenv('DB_NAME', 'accounts')
+
+DATABASE_URL = f"postgresql://{DB_USER}:{DB_PASSWORD}@{DB_HOST}:{DB_PORT}/{DB_NAME}"
+app.config['SQLALCHEMY_DATABASE_URI'] = DATABASE_URL
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
 db = SQLAlchemy(app)
 
@@ -36,7 +44,12 @@ class Account(db.Model):
 
 @app.route('/health', methods=['GET'])
 def health():
-    return jsonify({'status': 'healthy', 'service': 'accounts'}), 200
+    try:
+        db.session.execute(db.text('SELECT 1'))
+        return jsonify({'status': 'healthy', 'service': 'accounts'}), 200
+    except Exception as e:
+        return jsonify({'status': 'unhealthy', 'service': 'accounts', 'error': str(e)}), 503
+
 
 @app.route('/api/accounts', methods=['GET'])
 def get_accounts():
@@ -68,5 +81,5 @@ def create_account():
 if __name__ == '__main__':
     with app.app_context():
         db.create_all()
-        app.run(debug=True, host='0.0.0.0', port=8080)
-        print("Accounts service is running on port 8080")
+        app.run(debug=False, host='0.0.0.0', port=8080)
+        
