@@ -72,3 +72,41 @@ variable "eks_node_instance_types" {
   type        = list(string)
   default     = ["t3.micro"]
 }
+
+#RDS variables
+
+variable "rds_instance_class" {
+  description = "RDS instance class"
+  type        = string
+  default     = "db.t3.micro"
+}
+
+variable "rds_allocated_storage" {
+  description = "RDS allocated storage in GB"
+  type        = number
+  default     = 20
+}
+
+variable "rds_multi_az" {
+  description = "RDS multi-az"
+  type        = bool
+  default     = true
+}
+
+variable "rds_delete_protection" {
+  description = "RDS delete protection"
+  type        = bool
+  default     = false
+}
+
+variable "rds_backup_retention_period" {
+  description = "RDS backup retention period in days"
+  type        = number
+  default     = 7
+}
+
+variable "rds_backup_window" {
+  description = "RDS backup window"
+  type        = string
+}
+

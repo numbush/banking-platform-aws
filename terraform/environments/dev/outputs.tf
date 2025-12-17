@@ -53,3 +53,32 @@ output "configure_kubectl" {
   description = "Command to configure kubectl"
   value       = "aws eks update-kubeconfig --name ${module.eks.cluster_name} --region ${var.aws_region}"
 }
+
+# ECR Outputs
+output "ecr_repository_urls" {
+  description = "ECR repository URLs"
+  value       = module.ecr.repository_urls
+}
+
+# RDS Outputs
+output "rds_accounts_endpoint" {
+  description = "Accounts RDS endpoint"
+  value       = module.rds_accounts.db_instance_endpoint
+}
+
+output "rds_cards_endpoint" {
+  description = "Cards RDS endpoint"
+  value       = module.rds_cards.db_instance_endpoint
+}
+
+output "rds_loans_endpoint" {
+  description = "Loans RDS endpoint"
+  value       = module.rds_loans.db_instance_endpoint
+}
+
+# Secrets Manager Outputs
+output "secret_arns" {
+  description = "Secret ARNs"
+  value       = module.secrets.secret_arns
+  sensitive   = true
+}
